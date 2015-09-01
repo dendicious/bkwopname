@@ -1,5 +1,4 @@
-# bkwopname
-Projek Beton Konstruksi Wicaksana : Opname
+# Sistem Opname PT Beton Konstruksi Wicaksana (BKW) 
 
 Kontributor :
 -Dendi Abdul Rohim
