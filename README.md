@@ -8,7 +8,5 @@ RDBMS               : MySQL
 
 Bahasa Pemrograman  : PHP
 
-Framework           : CodeIgniter 
-
-                      Metro UI 3.0
+Framework           : CodeIgniter, Metro UI 3.0
                       
