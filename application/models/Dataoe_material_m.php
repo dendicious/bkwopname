@@ -100,10 +100,26 @@
 			return $query;
 		}
 
+		public function getMaxId(){
+			$this->db->select_max('no_rec', 'max_id');
+			$query 	= $this->db->get('dataoe_material');
+
+			if($query->num_rows() > 0){
+				foreach ($query->result() as $maxid_db) {
+					$max_id = $maxid_db->max_id;
+				}
+			}
+
+			$max_id++;
+			return $max_id;
+		}
+
 		public function insertData($dataarray){
 
       		for($i=0;$i<count($dataarray);$i++){
+      			$id = $this->getMaxId();
 		        $data = array(
+		        	'no_rec'=>$id,
 		            'id_user'=>$dataarray[$i]['id_user'],
 		            'id_project'=>$dataarray[$i]['id_proyek'],
 		            'id_produk'=>$dataarray[$i]['id_produk'],
@@ -115,19 +131,32 @@
 		            
 		            );
 		            
-		            $this->db->insert('dataoe_material', $data);
-		         }
+		    $this->db->insert('dataoe_material', $data);
+		    }
      	}
 
-     	public  function getNow(){
+     	public function ubah($dataoe_material){
+     		$this->db->where('no_rec', $this->getNo_rec());
+     		$query	= $this->db->update('dataoe_material', $dataoe_material);
+
+     		return $query;
+     	}
+
+     	public function hapus(){
+     		$this->db->where('no_rec', $this->getNo_rec());
+     		$query 	= $this->db->delete('dataoe_material');
+
+     		return $query;
+     	}
+
+     	public function getNow(){
 		    $sql    = 'SELECT NOW() AS NOW';
 		    $query  = $this->db->query($sql);
 
-		        foreach ($query->result() as $time) {
-		            $now = $time->NOW;
-		        }
-
-		        return $now;
+		    foreach ($query->result() as $time) {
+		        $now = $time->NOW;
+	        }
+	        return $now;
 		}
 	}
 ?>

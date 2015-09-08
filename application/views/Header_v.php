@@ -37,6 +37,8 @@
 						}
 						else if($this->session->userdata('bkwopname_idjabatan') == 2){
 					?>
+						<a class="app-bar-element" href="<?php echo site_url();?>Dataproyek">Data Proyek</a>
+						<a class="app-bar-element" href="<?php echo site_url();?>Dataoe_material">Data Material</a>
 					<?php
 						}
 						else if($this->session->userdata('bkwopname_idjabatan') == 3){
