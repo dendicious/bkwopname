@@ -26,7 +26,25 @@
 
 			<br/>
 			<table class="table bordered border" id="table">
+
 				<thead>
+					<th colspan="8">
+						<div class="place-right">
+							<select id="select2" name="id_proyek" class="id_proyek" style="width:380px;">
+							<?php
+								$jml_proyek	= count($idproyek_dataproyek);
+								if($jml_proyek > 0){
+									for($j=0; $j<$jml_proyek; $j++) {
+									
+							?>
+									<option value="<?php echo $idproyek_dataproyek[$j]; ?>"><?php echo $idproyek_dataproyek[$j]; ?></option>
+							<?php
+									}		
+								}
+							?>
+							</select>
+						</div>
+					</th>
 					<tr>
 						<th>ID Proyek</th>
 						<th>Nama Proyek</th>
@@ -181,23 +199,27 @@
 			<br/>
 		</div>
 	</body>
-
-	<script>
-	    function showDialog(id){
+	<script type="text/javascript">
+		function showDialog(id){
 	        var dialog = $(id).data('dialog');
 	        dialog.open();
 	    }
 
 	    function closeDialog(id){
-	    	 var dialog = $(id).data('dialog');
+	    	var dialog = $(id).data('dialog');
 	        dialog.close();
 	    }
-	</script>
-	<script type="text/javascript">
+
 		$(document).ready(function() {
 			$("#table").dataTable();
 
-			$("#select").select2();
+			$("#select2").select2();
+
+			$(".id_proyek").change(function(){
+				var value = $(".id_proyek").val();
+				
+			});
+
 
 			$(".edit").click(function(){
 				var id 	= this.id.substr(5);
