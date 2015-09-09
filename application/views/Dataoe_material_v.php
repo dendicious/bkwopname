@@ -226,7 +226,6 @@
 					showDialog('#alert_field');
 				}
 				else{
-					//showDialog('#success_update');
 					$.ajax({
 			            url: "<?php echo site_url();?>Dataoe_material/ubah",
 			       		data: form_data_material,

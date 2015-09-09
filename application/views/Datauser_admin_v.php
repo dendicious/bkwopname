@@ -219,16 +219,13 @@
             	}else{
             		$.post("<?php echo site_url();?>Datauser/cek_username", {uname:uname}, function(data){
             			if(data == 0){
-            				showDialog('#success_update');
 							$.ajax({
 			            		url: "<?php echo site_url();?>Datauser/tambah",
 			            		data: form_data_user,
 			            		type: "post",
-			            		//success: function(data){
-			            			//closeDialog('#form_data_user');
-			            			//location.reload();
-			            			//showDialog('#success_update');
-			            		//}
+			            		complete: function(data){
+			            			showDialog('#success_update');
+			            		}
 			            	});
             			}
             			else{
@@ -245,7 +242,6 @@
 				$("#nama").val($('#nama_' + id).val());
             	$("#username").val($('#username_' + id).val());
             	$(".jabatan").val($('#id_jabatan_' + id).val());
-            	//$(".jabatan").text($('#jabatan_' + id).val());
             	$("#password").val('');
             	$("#password").attr('placeholder', 'Kosongkan jika tidak ingin merubah password');
             	$("#note").show();
@@ -268,32 +264,25 @@
             	}else{
             		$.post("<?php echo site_url();?>Datauser/cek_username", {uname:uname}, function(data){
             			if(data == 0){
-            				showDialog('#success_update');
 							$.ajax({
 			            		url: "<?php echo site_url();?>Datauser/ubah",
 			            		data: form_data_user,
 			            		type: "post",
-			            		//success: function(data){
-			            			//closeDialog('#form_data_user');
-			            			//location.reload();
-			            			//showDialog('#success_update');
-			            		//}
+			            		complete: function(data){
+			            			showDialog('#success_update');
+			            		}
 			            	});
             			}
             			else{
             				$.post("<?php echo site_url();?>Datauser/cek_akun", {id:id, uname:uname}, function(data2){
-            					//alert(data2);
             					if(data2 > 0){
-            						showDialog('#success_update');
 									$.ajax({
 					            		url: "<?php echo site_url();?>Datauser/ubah",
 					            		data: form_data_user,
 					            		type: "post",
-					            		//success: function(data){
-					            			//closeDialog('#form_data_user');
-					            			//location.reload();
-					            			//showDialog('#success_update');
-					            		//}
+					            		complete: function(data){
+					            			showDialog('#success_update');
+					            		}
 					            	});
             					}
             					else{

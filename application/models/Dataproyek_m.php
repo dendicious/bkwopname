@@ -112,5 +112,26 @@
 	        return $query;
 
 	    }
+
+	    public function tambah($dataproyek){
+	    	$query 	= $this->db->insert('dataproyek', $dataproyek);
+	    	$value 	= $query->num_rows();
+
+	    	return $value;
+	    }
+
+	    public function ubah($dataproyek){
+	    	$this->db->where('id_proyek', $this->getId_proyek());
+	    	$query	= $this->db->update('dataproyek', $dataproyek);
+
+	    	return $query;
+	    }
+
+	    public function hapus(){
+	    	$this->db->where('id_proyek', $this->getId_proyek());
+	    	$query 	= $this->db->delete('dataproyek');
+
+	    	return $query;
+	    }
 	}
 ?>
