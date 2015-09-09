@@ -22,7 +22,7 @@
 				<div class="container">
 					<div style="margin-left:0; margin-top:2%; margin-right:6%">
 						<span>
-							<!--<img src="<?php echo base_url();?>assets/img/logo.png" width="15%">-->
+							<img src="<?php echo base_url();?>assets/img/logo.png" width="15%">
 						</span>
 					</div>
 
