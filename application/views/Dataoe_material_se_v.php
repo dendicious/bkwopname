@@ -18,23 +18,31 @@
 			<br/>
 			<table class="table bordered border hovered" id='table_origin'>
 				<thead>
-					<!-- <th colspan="6">
+					<th colspan="6">
 						<div class="place-right">
+							<?php
+								if($id != ''){
+							?>
+								<input type="hidden" id="id_projek_reload" value="<?php echo $id; ?>" />
+							<?php
+								}
+							?>
+								<input type="hidden" id="notif" value="<?php echo $notif; ?>" />
+
 							<select id="select" name="id_proyek" class="id_proyek" style="width:380px;">
 							<?php
 								$jml_proyek	= count($id_proyekdistinct);
 								if($jml_proyek > 0){
 									for($j=0; $j<$jml_proyek; $j++) {
-									
 							?>
-									<option value="<?php echo $id_proyekdistinct[$j]; ?>"><?php echo $id_proyekdistinct[$j]; ?></option>
+										<option value="<?php echo $id_proyekdistinct[$j]; ?>"><?php echo $id_proyekdistinct[$j]; ?></option>
 							<?php
 									}		
 								}
 							?>
 							</select>
 						</div>
-					</th> -->
+					</th>
 					<tr>
 						<th>ID Proyek</th>
 						<th>Nama Proyek</th>
@@ -114,8 +122,23 @@
 			<br/>
 		</div>
 		
+		<div data-role="dialog" id="alert_data" data-close-button="true" data-overlay="true" data-overlay-color="op-dark" data-width="500px" class="padding20">
+			<br/>
+			<span class="mif-notification mif-3x fg-green" style="color:#FF5500"></span> Data yang Anda cari tidak ada pada tabel
+			<br/>
+			<button class="button rounded success ok_alert_data place-right"><span class="mif-thumbs-up icon"></span> OK</button>
+		</div>
+
 	</body>
 	<script>
+		function showDialog(id){
+	        var dialog = $(id).data('dialog');
+	        dialog.open();
+	    }
+	    function closeDialog(id){
+	    	var dialog = $(id).data('dialog');
+	        dialog.close();
+	    }
 		function MoveRow(id){
 			var formatRow = "<tr id='table_target_row_"+id+"' onclick='removeDataSe("+id+")'>";
 				formatRow += "<input type='hidden' id='no_rec_se"+$("#no_rec"+id).val()+"' value='"+$("#no_rec"+id).val()+"' value = '"+$("#no_rec"+id).val()+"' name='no_rec_se'>";
@@ -174,13 +197,29 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			DisableRowClick();
+			start();
+
+			function start(){
+				var notif 	= $("#notif").val();
+
+				if(notif > 0){
+					showDialog('#alert_data');
+				}
+			}
+
 			$(".table").dataTable();
 
 			$("#select").select2();
 
+			$(".id_proyek").val($("#id_projek_reload").val());
+
 			$(".id_proyek").change(function(){
-				var value = $(".id_proyek").val();
-				
+				var value 		= $(".id_proyek").val();
+				window.location	= '<?php echo site_url(); ?>Dataoe_material/DataoeById/' + value;
+			});
+
+			$(".ok_alert_data").click(function(){
+				closeDialog('#alert_data');
 			});
 		});
 	</script>

@@ -100,6 +100,13 @@
 			return $query;
 		}
 
+		public function getByIdProject(){
+			$this->db->where('id_project', $this->getId_project());
+			$query 	= $this->db->get('dataoe_material');
+
+			return $query;
+		}
+
 		public function getMaxId(){
 			$this->db->select_max('no_rec', 'max_id');
 			$query 	= $this->db->get('dataoe_material');
@@ -157,6 +164,13 @@
 		        $now = $time->NOW;
 	        }
 	        return $now;
+		}
+
+		public function cekIdProject(){
+			$this->db->where('id_project', $this->getId_project());
+			$query 	= $this->db->get('dataoe_material');
+
+			return $query->num_rows();
 		}
 	}
 ?>

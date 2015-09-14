@@ -207,27 +207,21 @@
 	    	var dialog = $(id).data('dialog');
 	        dialog.close();
 	    }
-<<<<<<< HEAD
-		$(document).ready(function() {
-			$("#table").dataTable();
-			$("#select2").select2();
-=======
 
 		$(document).ready(function() {
 			$("#table").dataTable();
+			$("#select2").select2();
+
+		$(document).ready(function() {
+			$("#table").dataTable();
 
 			$("#select2").select2();
 
->>>>>>> ff429be057f02e61bd16a976c42c427f16c3d7fc
 			$(".id_proyek").change(function(){
 				var value = $(".id_proyek").val();
 				
 			});
-<<<<<<< HEAD
-=======
 
-
->>>>>>> ff429be057f02e61bd16a976c42c427f16c3d7fc
 			$(".edit").click(function(){
 				var id 	= this.id.substr(5);
 				$("#no_rec").val(id);
