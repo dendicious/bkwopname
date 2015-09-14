@@ -1,3 +1,6 @@
+		<?php
+			if($this->session->userdata('bkwopname_uname') != ''){
+		?>
 		<div class="container page-content">
 			<br/>
 			<br/>
@@ -75,3 +78,9 @@
 			$('#tr_password').hide();
 		});
 	</script>
+	<?php
+		}
+		else{
+			redirect('Login');
+		}
+	?>

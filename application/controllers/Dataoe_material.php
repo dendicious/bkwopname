@@ -9,6 +9,8 @@
 
 			$this->load->model('Dataoe_material_m');
 			$this->load->model('Dataproyek_m');
+			$this->load->model('Datase_material_m');
+			
 
 			$this->load->helper('url');
 	        $this->load->helper('form');
@@ -46,7 +48,17 @@
 			}
 
 			$this->load->view('Header_v');
-			$this->load->view('Dataoe_material_v', array('id_proyek' => $id_proyek, 'id_produk' => $id_produk, 'volume' => $volume, 'nama_proyek' => $nama_proyek, 'pic' => $pic, 'no_rec' => $no_rec, 'harga_satuan' => $harga_satuan, 'total_harga' => $total_harga, 'idproyek_dataproyek' => $idproyek_dataproyek, 'namaproyek_dataproyek' => $namaproyek_dataproyek));
+			$this->load->view('Dataoe_material_v', array('id_proyek' => $id_proyek,
+														 'id_produk' => $id_produk, 
+														 'volume' => $volume, 
+														 'nama_proyek' => $nama_proyek, 
+														 'pic' => $pic, 
+														 'no_rec' => $no_rec, 
+														 'harga_satuan' => $harga_satuan, 
+														 'total_harga' => $total_harga, 
+														 'idproyek_dataproyek' => $idproyek_dataproyek, 
+														 'namaproyek_dataproyek' => $namaproyek_dataproyek)
+														);
 			$this->load->view('Footer_v');
 		}
 
@@ -136,6 +148,8 @@
 					$id_proyek[] 	= $dataoedb->id_project;
 					$id_produk[]	= $dataoedb->id_produk;
 					$volume[]		= $dataoedb->volume;
+					$harga_satuan[] = $dataoedb->harga_satuan;
+					$total_harga[]  = $dataoedb->total_harga;
 				}
 
 				for($i=0; $i<count($id_proyek); $i++){
@@ -148,6 +162,29 @@
 				}
 			}
 
+			$getDatase	= $this->Datase_material_m->getAll();
+			if($getDatase->num_rows() > 0){
+				foreach ($getDatase->result() as $datasedb) {
+					$no_rec_se[] 		= $datasedb->no_rec;
+					$id_proyek_se[] 	= $datasedb->id_project;
+					$id_produk_se[]		= $datasedb->id_produk;
+					$volume_se[]		= $datasedb->volume;
+					// $harga_satuan_se[]	= $datasedb->harga_satuan;
+					// $total_harga_se[] 	= $datasedb->total_harga;
+				}
+
+				for($i=0; $i<count($id_proyek_se); $i++){
+					$this->Dataproyek_m->setId_proyek($id_proyek_se[$i]);
+					$dataproyek_se 	= $this->Dataproyek_m->getById();
+					foreach ($dataproyek_se->result() as $dataproyek_sedb) {
+						$nama_proyek_se[]	= $dataproyek_sedb->nama_proyek;
+						$pic_se[] 			= $dataproyek_sedb->pic;
+					}
+				}
+			}
+
+
+
 			$getDataProyek	= $this->Dataproyek_m->getAll();
 			if($getDataProyek->num_rows() > 0){
 				foreach ($getDataProyek->result() as $datadbproyek) {
@@ -156,8 +193,69 @@
 			}
 
 			$this->load->view('Header_v');
-			$this->load->view('Dataoe_material_se_v', array('id_proyek' => $id_proyek, 'id_produk' => $id_produk, 'volume' => $volume, 'nama_proyek' => $nama_proyek, 'pic' => $pic, 'no_rec' => $no_rec, 'id_proyekdistinct' => $id_proyek_distinct));
+			$this->load->view('Dataoe_material_se_v', array('id_proyek' 		=> $id_proyek, 
+															'id_produk'	 		=> $id_produk, 
+															'volume' 			=> $volume, 
+															'nama_proyek' 		=> $nama_proyek, 
+															'pic' 				=> $pic, 
+															'no_rec' 			=> $no_rec, 
+															'harga_satuan' 		=> $harga_satuan,
+															'total_harga' 		=> $total_harga,
+															'id_proyek_se' 		=> $id_proyek_se,
+															'id_produk_se' 		=> $id_produk_se, 
+															'volume_se' 		=> $volume_se, 
+															'nama_proyek_se' 	=> $nama_proyek_se, 
+															'pic_se' 			=> $pic_se, 
+															'no_rec_se' 		=> $no_rec_se, 
+															'id_proyekdistinct' => $id_proyek_distinct));
 			$this->load->view('Footer_v');
 		}
+
+		function GetJsonDatase_material(){
+			$resultJson= '';
+			$getDatase	= $this->Datase_material_m->getAll();
+			if($getDatase->num_rows() > 0){
+				$resultJson = json_encode($getDatase->result());
+			}
+			else{
+				$resultJson =  '{"err":"Cannot Find Data in database"}';
+			}
+			echo $resultJson;
+		}
+
+		function insertDataseMaterial(){
+			$no_rec 		= $this->input->post('no_rec');
+			$id_user		= $this->session->userdata('bkwopname_user');
+			$id_proyek 		= $this->input->post('id_proyek');
+			$id_produk 		= $this->input->post('id_produk');
+			$volume 		= $this->input->post('volume');
+			$harga_satuan	= $this->input->post('harga_satuan');
+			$total_harga	= $this->input->post('total_harga');
+			$tanggal_dibuat = $this->Datase_material_m->getNow();
+
+			$datase_material= array(
+										'no_rec' 			=> $no_rec,
+										'id_user'			=> $id_user,
+										'id_proyek'			=> $id_proyek,
+										'id_produk'			=> $id_produk,
+										'volume'			=> $volume,
+										'harga_satuan'		=> $harga_satuan,
+										'total_harga'		=> $total_harga,
+										'tanggal_dibuat'	=> $tanggal_dibuat
+									);
+
+			$this->Datase_material_m->insertSingleData($datase_material);
+			echo '{"result":true}';
+
+		}
+	function deleteDataSeMaterial(){
+		$no_rec = $this->input->get('no_rec');
+		$this->Datase_material_m->setNo_rec($no_rec);
+		$this->Datase_material_m->hapus();
+
+		echo '{"result":true}';
+	}
+		
+
 	}
 ?>

@@ -290,5 +290,11 @@
 
 	<?php
 			}
+			else{
+				redirect('Login');
+			}
+		}
+		else{
+			redirect('Login');
 		}
 	?>

@@ -1,6 +1,6 @@
 		<?php
 			if($this->session->userdata('bkwopname_uname') != ''){
-				if($this->session->userdata('bkwopname_idjabatan') == 2){
+				if($this->session->userdata('bkwopname_idjabatan') == 3){
 		?>
 		<div class="container page-content">
 			<br/>
@@ -14,37 +14,11 @@
 			<br/>
 			<br/>
 			<br/>
-			<h2><small>Data Material</small></h2>
-			<br/>
-			<?php echo form_open_multipart('Dataoe_material/do_upload');?>
-				<div class="input-control file" data-role="input">
-					<input type="file" id="file_upload" name="userfile" size="20" />
-					<button class="button"><span class="mif-folder"></span></button>
-				</div>
-					<input type="submit" class="button rounded primary" value="Upload" />
-			<?php echo form_close();?>
-
+			<h2><small>Data Material Site Engineering</small></h2>
 			<br/>
 			<table class="table bordered border" id="table">
 
 				<thead>
-					<th colspan="8">
-						<div class="place-right">
-							<select id="select2" name="id_proyek" class="id_proyek" style="width:380px;">
-							<?php
-								$jml_proyek	= count($idproyek_dataproyek);
-								if($jml_proyek > 0){
-									for($j=0; $j<$jml_proyek; $j++) {
-									
-							?>
-									<option value="<?php echo $idproyek_dataproyek[$j]; ?>"><?php echo $idproyek_dataproyek[$j]; ?></option>
-							<?php
-									}		
-								}
-							?>
-							</select>
-						</div>
-					</th>
 					<tr>
 						<th>ID Proyek</th>
 						<th>Nama Proyek</th>
@@ -97,9 +71,10 @@
 				    			<td><label id="label_proyek">Proyek</label></td>
 				    			<td>:</td>
 				    			<td>
-							    	<select id="select" name="proyek" class="proyek" style="width:380px;">
+							    	<select id="select2" name="proyek" class="proyek" style="width:380px;">
 							    		<?php
 							    			$jml_dataproyek = count($idproyek_dataproyek);
+
 							    			for($j=0; $j<$jml_dataproyek; $j++){
 							    		?>
 							    				<option value="<?php echo $idproyek_dataproyek[$j]; ?>"><?php echo $namaproyek_dataproyek[$j]; ?></option>
@@ -197,6 +172,7 @@
 			<br/>
 			<br/>
 		</div>
+		
 	</body>
 	<script type="text/javascript">
 		function showDialog(id){
@@ -207,27 +183,13 @@
 	    	var dialog = $(id).data('dialog');
 	        dialog.close();
 	    }
-<<<<<<< HEAD
 		$(document).ready(function() {
 			$("#table").dataTable();
 			$("#select2").select2();
-=======
-
-		$(document).ready(function() {
-			$("#table").dataTable();
-
-			$("#select2").select2();
-
->>>>>>> ff429be057f02e61bd16a976c42c427f16c3d7fc
 			$(".id_proyek").change(function(){
 				var value = $(".id_proyek").val();
 				
 			});
-<<<<<<< HEAD
-=======
-
-
->>>>>>> ff429be057f02e61bd16a976c42c427f16c3d7fc
 			$(".edit").click(function(){
 				var id 	= this.id.substr(5);
 				$("#no_rec").val(id);
@@ -254,7 +216,7 @@
 				}
 				else{
 					$.ajax({
-			            url: "<?php echo site_url();?>Dataoe_material/ubah",
+			            url: "<?php echo site_url();?>Datase_material/ubah",
 			       		data: form_data_material,
 			       		type: "post",
 			       		success: function(data){
@@ -275,7 +237,7 @@
 			});
 			$(".hapus").click(function(){
 				var id 	= $("#norec_hapus").val();
-				$.post("<?php echo site_url();?>Dataoe_material/hapus", {id:id}, function(data){
+				$.post("<?php echo site_url();?>Datase_material/hapus", {id:id}, function(data){
 					if(data > 0){
 						closeDialog('#konfirmasi');
 						showDialog('#success_update');
