@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2015 at 04:10 AM
+-- Generation Time: Sep 15, 2015 at 06:41 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -79,7 +79,7 @@ INSERT INTO `dataoe_material` (`no_rec`, `id_user`, `id_project`, `id_produk`, `
 --
 
 CREATE TABLE IF NOT EXISTS `datape_material` (
-  `no_rec` int(10) NOT NULL AUTO_INCREMENT,
+  `no_rec` int(10) NOT NULL,
   `id_user` varchar(15) NOT NULL,
   `id_project` varchar(30) NOT NULL,
   `id_produk` varchar(30) NOT NULL,
@@ -89,7 +89,15 @@ CREATE TABLE IF NOT EXISTS `datape_material` (
   `tanggal_dibuat` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `tanggal_update` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`no_rec`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `datape_material`
+--
+
+INSERT INTO `datape_material` (`no_rec`, `id_user`, `id_project`, `id_produk`, `volume`, `harga_satuan`, `total_harga`, `tanggal_dibuat`, `tanggal_update`) VALUES
+(1, 'U004', 'PRJK-002452', 'X2-Y2/01/AB', 4, 300000, 1200000, '2015-09-15 04:22:13', '0000-00-00 00:00:00'),
+(3, 'U004', 'PRJK-002453', 'X2-Y2/01/AB', 3, 950000, 2750000, '2015-09-15 04:25:57', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -137,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `datase_headinvoice` (
 --
 
 CREATE TABLE IF NOT EXISTS `datase_invoice` (
-  `no_rec` int(10) NOT NULL AUTO_INCREMENT,
+  `no_rec` int(10) NOT NULL,
   `id_user` varchar(15) NOT NULL,
   `id_project` varchar(30) NOT NULL,
   `id_produk` varchar(30) NOT NULL,
@@ -147,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `datase_invoice` (
   `tanggal_dibuat` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `tanggal_update` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`no_rec`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -174,7 +182,8 @@ CREATE TABLE IF NOT EXISTS `datase_material` (
 
 INSERT INTO `datase_material` (`no_rec`, `id_user`, `id_project`, `id_produk`, `volume`, `harga_satuan`, `total_harga`, `tanggal_dibuat`, `tanggal_update`) VALUES
 (1, 'U003', 'PRJK-002452', 'X2-Y2/01/AB', 4, 300000, 1200000, '2015-09-14 04:17:18', '0000-00-00 00:00:00'),
-(2, 'U003', 'PRJK-002452', 'X6-Y5/02/CK', 6, 700000, 4200000, '2015-09-14 04:23:42', '0000-00-00 00:00:00');
+(2, 'U003', 'PRJK-002452', 'X6-Y5/02/CK', 6, 700000, 4200000, '2015-09-15 04:22:47', '0000-00-00 00:00:00'),
+(3, 'U003', 'PRJK-002453', 'X2-Y2/01/AB', 3, 950000, 2750000, '2015-09-15 04:23:31', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -205,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `datasm_headpo` (
 --
 
 CREATE TABLE IF NOT EXISTS `datasm_material` (
-  `no_rec` int(10) NOT NULL AUTO_INCREMENT,
+  `no_rec` int(10) NOT NULL,
   `id_user` varchar(15) NOT NULL,
   `id_project` varchar(30) NOT NULL,
   `id_produk` varchar(30) NOT NULL,
@@ -215,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `datasm_material` (
   `tanggal_dibuat` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `tanggal_update` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`no_rec`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -241,7 +250,8 @@ CREATE TABLE IF NOT EXISTS `datauser` (
 INSERT INTO `datauser` (`id_user`, `username`, `password`, `nama`, `id_jabatan`, `tanggal_dibuat`, `tanggal_update`) VALUES
 ('U001', 'fernalia', 'fc3cee5d6a37bd5732a96e6f87ffaf2d', 'Fernalia', 1, '2015-09-05 05:20:53', '2015-09-05 05:20:53'),
 ('U002', 'ferdiana', '827ccb0eea8a706c4c34a16891f84e7b', 'Ferdiana', 2, '2015-09-05 05:35:22', '2015-09-05 06:20:37'),
-('U003', 'fauziyyah', '827ccb0eea8a706c4c34a16891f84e7b', 'Fauziyyah', 3, '2015-09-06 15:04:06', '2015-09-07 13:30:43');
+('U003', 'fauziyyah', '827ccb0eea8a706c4c34a16891f84e7b', 'Fauziyyah', 3, '2015-09-06 15:04:06', '2015-09-07 13:30:43'),
+('U004', 'frisca', '827ccb0eea8a706c4c34a16891f84e7b', 'Frisca', 4, '2015-09-15 02:41:22', NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

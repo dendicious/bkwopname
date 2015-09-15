@@ -1,6 +1,6 @@
 		<?php
 			if($this->session->userdata('bkwopname_uname') != ''){
-				if($this->session->userdata('bkwopname_idjabatan') == 3){
+				if($this->session->userdata('bkwopname_idjabatan') == 4){
 		?>
 		<div class="container page-content">
 			<br/>
@@ -14,7 +14,7 @@
 			<br/>
 			<br/>
 			<br/>
-			<h2><small>Data Material Office Engineering</small></h2>
+			<h2><small>Data Material Site Engineering</small></h2>
 			<br/>
 			<table class="table bordered border hovered" id='table_origin'>
 				<thead>
@@ -85,7 +85,7 @@
 		</div>
 		<div class="container page-content">
 			
-			<h2><small>Data Material Site Engineering</small></h2>
+			<h2><small>Data Material Pelaksana</small></h2>
 			<br/>
 			<table class="table bordered border hovered" id='tabel_target'>
 				<thead>
@@ -99,16 +99,16 @@
 				</thead>
 				<tbody>
 					<?php
-						$jml = count($id_proyek_se);
+						$jml = count($id_proyek_pe);
 						for ($i=0; $i < $jml; $i++) { 
 					?>
-					<tr id="table_target_row_<?php echo $no_rec_se[$i];?>" onclick="removeDataSe(<?php echo $no_rec_se[$i];?>)">
-						<input type="hidden" id="no_rec_se<?php echo $no_rec_se[$i];?>" value="<?php echo $no_rec_se[$i]; ?>" name="no_rec_se">
-						<td><?php echo $id_proyek_se[$i]; ?></td>
-						<td><?php echo $nama_proyek_se[$i]; ?></td>
-						<td><?php echo $pic_se[$i]; ?></td>
-						<td><?php echo $id_produk_se[$i]; ?></td>
-						<td><?php echo $volume_se[$i]; ?></td>
+					<tr id="table_target_row_<?php echo $no_rec_pe[$i];?>" onclick="removeDataSe(<?php echo $no_rec_pe[$i];?>)">
+						<input type="hidden" id="no_rec_pe<?php echo $no_rec_pe[$i];?>" value="<?php echo $no_rec_pe[$i]; ?>" name="no_rec_pe">
+						<td><?php echo $id_proyek_pe[$i]; ?></td>
+						<td><?php echo $nama_proyek_pe[$i]; ?></td>
+						<td><?php echo $pic_pe[$i]; ?></td>
+						<td><?php echo $id_produk_pe[$i]; ?></td>
+						<td><?php echo $volume_pe[$i]; ?></td>
 					</tr>
 					<?php
 						}
@@ -153,7 +153,7 @@
 			DisableRowClick();
 		}
 		function DisableRowClick(){
-			$.get("<?php echo site_url();?>Dataoe_material/GetJsonDatase_material", function( data ) {
+			$.get("<?php echo site_url();?>Datape_material/GetJsonDatape_material", function( data ) {
 	            var result = JSON.parse(data);
 	            for (var i = 0; i < result.length; i++) {
 	            	$("#table_origin_row_"+result[i].no_rec).removeAttr("onClick");
@@ -169,7 +169,7 @@
 			var harga_satuan= $("#harga_satuan"+id).val();
 			var total_harga= $("#total_harga"+id).val();
 
-			$.post('<?php echo site_url();?>Dataoe_material/insertDataseMaterial', {no_rec:no_rec, id_proyek:id_proyek, id_produk:id_produk,volume:volume,harga_satuan:harga_satuan,total_harga:total_harga},function(data){
+			$.post('<?php echo site_url();?>Datape_material/insertDatapeMaterial', {no_rec:no_rec, id_proyek:id_proyek, id_produk:id_produk,volume:volume,harga_satuan:harga_satuan,total_harga:total_harga},function(data){
 				var result = JSON.parse(data);
 				if (result.result) {
 					DisableRowClick();
@@ -184,7 +184,7 @@
 				$("#table_origin_row_"+id).removeAttr("style");
 				$("#table_origin_row_"+id).attr("onclick","MoveRow("+id+")");
 				$("#table_target_row_"+id).remove();
-				$.get('<?php echo site_url();?>Dataoe_material/deleteDataSeMaterial?no_rec='+id,function(data){
+				$.get('<?php echo site_url();?>Datape_material/deleteDataPeMaterial?no_rec='+id,function(data){
 					var result = JSON.parse(data);
 					if (result.result) {
 						alert("Delete Success");
@@ -215,7 +215,7 @@
 
 			$(".id_proyek").change(function(){
 				var value 		= $(".id_proyek").val();
-				window.location	= '<?php echo site_url(); ?>Dataoe_material/DataoeById/' + value;
+				window.location	= '<?php echo site_url(); ?>Datape_material/DatapeById/' + value;
 			});
 
 			$(".ok_alert_data").click(function(){

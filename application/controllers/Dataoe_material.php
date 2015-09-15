@@ -222,7 +222,7 @@
 				$resultJson = json_encode($getDatase->result());
 			}
 			else{
-				$resultJson =  '{"err":"Cannot Find Data in database"}';
+				$resultJson =  '{"err":"Tidak dapat menemukan data pada database"}';
 			}
 			echo $resultJson;
 		}
@@ -383,8 +383,6 @@
 					}
 				}
 			}
-
-
 
 			$getDataProyek	= $this->Dataproyek_m->getAll();
 			if($getDataProyek->num_rows() > 0){

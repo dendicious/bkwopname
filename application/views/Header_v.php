@@ -47,6 +47,11 @@
 						<a class="app-bar-element" href="<?php echo site_url();?>Datase_material">Data Material SE</a>
 					<?php
 						}
+						else if($this->session->userdata('bkwopname_idjabatan') == 4){
+					?>
+						<a class="app-bar-element" href="<?php echo site_url();?>Datape_material">Data Material SE</a>
+					<?php
+						}
 					?>
 
 					<ul class="app-bar-menu place-right" data-flexdirection="reverse">
