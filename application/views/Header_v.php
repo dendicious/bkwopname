@@ -52,6 +52,11 @@
 						<a class="app-bar-element" href="<?php echo site_url();?>Datape_material">Data Material SE</a>
 					<?php
 						}
+						else if($this->session->userdata('bkwopname_idjabatan') == 5){
+					?>
+						<a class="app-bar-element" href="<?php echo site_url();?>Datasm_material">Data Material PE</a>
+					<?php
+						}
 					?>
 
 					<ul class="app-bar-menu place-right" data-flexdirection="reverse">
