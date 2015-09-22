@@ -155,7 +155,7 @@
      	}
 
      	public function getNow(){
-		    $sql    = 'SELECT NOW() AS NOW';
+		    $sql    = 'SELECT DATE(NOW()) AS NOW';
 		    $query  = $this->db->query($sql);
 
 		    foreach ($query->result() as $time) {

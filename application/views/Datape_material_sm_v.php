@@ -19,7 +19,7 @@
 			<table class="table bordered border hovered" id='table_origin'>
 				<thead>
 					<th colspan="6">
-						<div class="place-right">
+						<div class="place-left">
 							<?php
 								if($id != ''){
 							?>
@@ -42,6 +42,22 @@
 							?>
 							</select>
 						</div>
+						<div class="place-right">
+							<!--<label class="input-control checkbox" >
+								<input type="checkbox" id="checkbox" style="height:100px;" />
+								<span class="check"></span>
+							</label>-->
+							<div class="input-control text" data-role="datepicker" data-other-days="true" data-week-start="1" data-format="yyyy-mm-dd">
+							    <input type="text" id="datemin" />
+							    <button class="button"><span class="mif-calendar"></span></button>
+							</div>
+							s.d
+							<div class="input-control text" data-role="datepicker" data-other-days="true" data-week-start="1" data-format="yyyy-mm-dd">
+							    <input type="text" id="datemax" />
+							    <button class="button"><span class="mif-calendar"></span></button>
+							</div>
+							<button class="button rounded primary" id="search"><span class="mif-search"></span></button>
+						</div>
 					</th>
 					<tr>
 						<th>ID Proyek</th>
@@ -49,6 +65,7 @@
 						<th>ID PIC</th>
 						<th>ID Produk</th>
 						<th>Volume</th>
+						<th>Tanggal Dibuat</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -65,7 +82,7 @@
 						<input type="hidden" id="total_harga<?php echo $no_rec[$i];?>" value="<?php echo $total_harga[$i]; ?>">
 						<input type="hidden" id="nama_proyek<?php echo $no_rec[$i];?>" value="<?php echo $nama_proyek[$i]; ?>">
 						<input type="hidden" id="pic<?php echo $no_rec[$i];?>" value="<?php echo $pic[$i]; ?>">
-						
+						<input type="hidden" id="tanggal_dibuat<?php echo $no_rec[$i];?>" value="<?php echo $tanggal_dibuat[$i]; ?>">
 						
 						
 						<td><?php echo $id_proyek[$i]; ?></td>
@@ -73,6 +90,7 @@
 						<td><?php echo $pic[$i]; ?></td>
 						<td><?php echo $id_produk[$i]; ?></td>
 						<td><?php echo $volume[$i]; ?></td>
+						<td><?php echo $tanggal_dibuat[$i]; ?></td>
 					</tr>
 					<?php
 						}
@@ -95,6 +113,7 @@
 						<th>ID PIC</th>
 						<th>ID Produk</th>
 						<th>Volume</th>
+						<th>Tanggal Dibuat</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -109,6 +128,7 @@
 						<td><?php echo $pic_sm[$i]; ?></td>
 						<td><?php echo $id_produk_sm[$i]; ?></td>
 						<td><?php echo $volume_sm[$i]; ?></td>
+						<td><?php echo $tanggal_dibuat_sm[$i]; ?></td>
 					</tr>
 					<?php
 						}
@@ -147,6 +167,7 @@
 				formatRow += "<td>"+$("#pic"+id).val()+"</td>";
 				formatRow += "<td>"+$("#id_produk"+id).val()+"</td>";
 				formatRow += "<td>"+$("#volume"+id).val()+"</td>";
+				formatRow += "<td>"+$("#tanggal_dibuat"+id).val()+"</td>";
 				formatRow += "</tr>";
 			$("#tabel_target tr:last").after(formatRow);
 			insertDataSm(id);
@@ -162,14 +183,15 @@
 	        });
 		}
 		function insertDataSm(id){
-			var no_rec= $("#no_rec"+id).val();
-			var id_proyek = $("#id_proyek"+id).val();		
-			var id_produk= $("#id_produk"+id).val();
-			var volume= $("#volume"+id).val();
-			var harga_satuan= $("#harga_satuan"+id).val();
-			var total_harga= $("#total_harga"+id).val();
+			var no_rec 			= $("#no_rec"+id).val();
+			var id_proyek 		= $("#id_proyek"+id).val();		
+			var id_produk 		= $("#id_produk"+id).val();
+			var volume 			= $("#volume"+id).val();
+			var harga_satuan 	= $("#harga_satuan"+id).val();
+			var total_harga 	= $("#total_harga"+id).val();
+			var tanggal_dibuat 	= $("#tanggal_dibuat"+id).val();
 
-			$.post('<?php echo site_url();?>Datasm_material/insertDatasmMaterial', {no_rec:no_rec, id_proyek:id_proyek, id_produk:id_produk,volume:volume,harga_satuan:harga_satuan,total_harga:total_harga},function(data){
+			$.post('<?php echo site_url();?>Datasm_material/insertDatasmMaterial', {no_rec:no_rec, id_proyek:id_proyek, id_produk:id_produk,volume:volume,harga_satuan:harga_satuan,total_harga:total_harga,tanggal_dibuat:tanggal_dibuat},function(data){
 				var result = JSON.parse(data);
 				if (result.result) {
 					DisableRowClick();
@@ -220,6 +242,13 @@
 
 			$(".ok_alert_data").click(function(){
 				closeDialog('#alert_data');
+			});
+
+			$("#search").click(function(){
+				var datemin		= $("#datemin").val();
+				var datemax 	= $("#datemax").val();
+				
+				window.location	= '<?php echo site_url(); ?>Datasm_material/DatasmByDate/' + datemin + '/' + datemax;
 			});
 		});
 	</script>

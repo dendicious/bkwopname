@@ -16,12 +16,13 @@
 			$getDatape	= $this->Datape_material_m->getAll();
 			if($getDatape->num_rows() > 0){
 				foreach ($getDatape->result() as $datapedb) {
-					$no_rec[] 		= $datapedb->no_rec;
-					$id_proyek[] 	= $datapedb->id_project;
-					$id_produk[]	= $datapedb->id_produk;
-					$volume[]		= $datapedb->volume;
-					$harga_satuan[] = $datapedb->harga_satuan;
-					$total_harga[]  = $datapedb->total_harga;
+					$no_rec[] 			= $datapedb->no_rec;
+					$id_proyek[] 		= $datapedb->id_project;
+					$id_produk[]		= $datapedb->id_produk;
+					$volume[]			= $datapedb->volume;
+					$harga_satuan[] 	= $datapedb->harga_satuan;
+					$total_harga[]  	= $datapedb->total_harga;
+					$tanggal_dibuat[]	= $datapedb->tanggal_dibuat;
 				}
 
 				for($i=0; $i<count($id_proyek); $i++){
@@ -37,10 +38,11 @@
 			$getDatasm	= $this->Datasm_material_m->getAll();
 			if($getDatasm->num_rows() > 0){
 				foreach ($getDatasm->result() as $datasmdb) {
-					$no_rec_sm[] 		= $datasmdb->no_rec;
-					$id_proyek_sm[] 	= $datasmdb->id_project;
-					$id_produk_sm[]		= $datasmdb->id_produk;
-					$volume_sm[]		= $datasmdb->volume;
+					$no_rec_sm[] 			= $datasmdb->no_rec;
+					$id_proyek_sm[] 		= $datasmdb->id_project;
+					$id_produk_sm[]			= $datasmdb->id_produk;
+					$volume_sm[]			= $datasmdb->volume;
+					$tanggal_dibuat_sm[] 	= $datasmdb->tanggal_dibuat;
 				}
 
 				for($i=0; $i<count($id_proyek_sm); $i++){
@@ -69,12 +71,14 @@
 															'no_rec' 			=> $no_rec, 
 															'harga_satuan' 		=> $harga_satuan,
 															'total_harga' 		=> $total_harga,
+															'tanggal_dibuat'	=> $tanggal_dibuat,
 															'id_proyek_sm' 		=> $id_proyek_sm,
 															'id_produk_sm' 		=> $id_produk_sm, 
 															'volume_sm' 		=> $volume_sm, 
 															'nama_proyek_sm' 	=> $nama_proyek_sm, 
 															'pic_sm' 			=> $pic_sm, 
 															'no_rec_sm' 		=> $no_rec_sm, 
+															'tanggal_dibuat_sm' => $tanggal_dibuat_sm,
 															'id_proyekdistinct' => $id_proyek_distinct,
 															'notif'				=> 0,
 														 	'id'				=> ''
@@ -103,7 +107,7 @@
 			$volume 		= $this->input->post('volume');
 			$harga_satuan	= $this->input->post('harga_satuan');
 			$total_harga	= $this->input->post('total_harga');
-			$tanggal_dibuat = $this->Datasm_material_m->getNow();
+			$tanggal_dibuat = $this->input->post('tanggal_dibuat');
 
 			$datasm_material= array(
 										'no_rec' 			=> $no_rec,
@@ -131,19 +135,20 @@
 
 		public function DatasmById(){
 			$id 		= $this->uri->segment(3);
-			$this->Datasm_material_m->setId_project($id);
-			$jmlData	= $this->Datasm_material_m->cekIdProject();
+			$this->Datape_material_m->setId_project($id);
+			$jmlData	= $this->Datape_material_m->cekIdProject();
 			
 			if($jmlData > 0){
-				$getDatase	= $this->Datasm_material_m->getByIdProject();
+				$getDatape	= $this->Datape_material_m->getByIdProject();
 				if($getDatape->num_rows() > 0){
 				foreach ($getDatape->result() as $datapedb) {
-					$no_rec[] 		= $datapedb->no_rec;
-					$id_proyek[] 	= $datapedb->id_project;
-					$id_produk[]	= $datapedb->id_produk;
-					$volume[]		= $datapedb->volume;
-					$harga_satuan[] = $datapedb->harga_satuan;
-					$total_harga[]  = $datapedb->total_harga;
+					$no_rec[] 			= $datapedb->no_rec;
+					$id_proyek[] 		= $datapedb->id_project;
+					$id_produk[]		= $datapedb->id_produk;
+					$volume[]			= $datapedb->volume;
+					$harga_satuan[] 	= $datapedb->harga_satuan;
+					$total_harga[]  	= $datapedb->total_harga;
+					$tanggal_dibuat[]	= $datapedb->tanggal_dibuat;
 				}
 
 				for($i=0; $i<count($id_proyek); $i++){
@@ -159,10 +164,11 @@
 			$getDatasm	= $this->Datasm_material_m->getAll();
 			if($getDatasm->num_rows() > 0){
 				foreach ($getDatasm->result() as $datasmdb) {
-					$no_rec_sm[] 		= $datasmdb->no_rec;
-					$id_proyek_sm[] 	= $datasmdb->id_project;
-					$id_produk_sm[]		= $datasmdb->id_produk;
-					$volume_sm[]		= $datasmdb->volume;
+					$no_rec_sm[] 			= $datasmdb->no_rec;
+					$id_proyek_sm[] 		= $datasmdb->id_project;
+					$id_produk_sm[]			= $datasmdb->id_produk;
+					$volume_sm[]			= $datasmdb->volume;
+					$tanggal_dibuat_sm[] 	= $datasmdb->tanggal_dibuat;
 				}
 
 				for($i=0; $i<count($id_proyek_sm); $i++){
@@ -191,12 +197,14 @@
 															'no_rec' 			=> $no_rec, 
 															'harga_satuan' 		=> $harga_satuan,
 															'total_harga' 		=> $total_harga,
+															'tanggal_dibuat'	=> $tanggal_dibuat,
 															'id_proyek_sm' 		=> $id_proyek_sm,
 															'id_produk_sm' 		=> $id_produk_sm, 
 															'volume_sm' 		=> $volume_sm, 
 															'nama_proyek_sm' 	=> $nama_proyek_sm, 
 															'pic_sm' 			=> $pic_sm, 
 															'no_rec_sm' 		=> $no_rec_sm, 
+															'tanggal_dibuat_sm' => $tanggal_dibuat_sm,
 															'id_proyekdistinct' => $id_proyek_distinct,
 															'notif'				=> 0,
 														 	'id'				=> $id
@@ -208,12 +216,13 @@
 			$getDatape	= $this->Datape_material_m->getAll();
 			if($getDatape->num_rows() > 0){
 				foreach ($getDatape->result() as $datapedb) {
-					$no_rec[] 		= $datapedb->no_rec;
-					$id_proyek[] 	= $datapedb->id_project;
-					$id_produk[]	= $datapedb->id_produk;
-					$volume[]		= $datapedb->volume;
-					$harga_satuan[] = $datapedb->harga_satuan;
-					$total_harga[]  = $datapedb->total_harga;
+					$no_rec[] 			= $datapedb->no_rec;
+					$id_proyek[] 		= $datapedb->id_project;
+					$id_produk[]		= $datapedb->id_produk;
+					$volume[]			= $datapedb->volume;
+					$harga_satuan[] 	= $datapedb->harga_satuan;
+					$total_harga[]  	= $datapedb->total_harga;
+					$tanggal_dibuat[]	= $datapedb->tanggal_dibuat;
 				}
 
 				for($i=0; $i<count($id_proyek); $i++){
@@ -229,10 +238,11 @@
 			$getDatasm	= $this->Datasm_material_m->getAll();
 			if($getDatasm->num_rows() > 0){
 				foreach ($getDatasm->result() as $datasmdb) {
-					$no_rec_sm[] 		= $datasmdb->no_rec;
-					$id_proyek_sm[] 	= $datasmdb->id_project;
-					$id_produk_sm[]		= $datasmdb->id_produk;
-					$volume_sm[]		= $datasmdb->volume;
+					$no_rec_sm[] 			= $datasmdb->no_rec;
+					$id_proyek_sm[] 		= $datasmdb->id_project;
+					$id_produk_sm[]			= $datasmdb->id_produk;
+					$volume_sm[]			= $datasmdb->volume;
+					$tanggal_dibuat_sm[] 	= $datasmdb->tanggal_dibuat;
 				}
 
 				for($i=0; $i<count($id_proyek_sm); $i++){
@@ -261,12 +271,181 @@
 															'no_rec' 			=> $no_rec, 
 															'harga_satuan' 		=> $harga_satuan,
 															'total_harga' 		=> $total_harga,
+															'tanggal_dibuat'	=> $tanggal_dibuat,
 															'id_proyek_sm' 		=> $id_proyek_sm,
 															'id_produk_sm' 		=> $id_produk_sm, 
 															'volume_sm' 		=> $volume_sm, 
 															'nama_proyek_sm' 	=> $nama_proyek_sm, 
 															'pic_sm' 			=> $pic_sm, 
 															'no_rec_sm' 		=> $no_rec_sm, 
+															'tanggal_dibuat_sm' => $tanggal_dibuat_sm,
+															'id_proyekdistinct' => $id_proyek_distinct,
+															'notif'				=> 1,
+														 	'id'				=> ''
+															)
+							);
+			$this->load->view('Footer_v');
+		}
+	}
+
+	public function DatasmByDate(){
+		$datemin 		= $this->uri->segment(3);
+		$datemax 		= $this->uri->segment(4);
+
+		/*$thn_min	= substr($datemin,0,4);
+		$bln_min	= substr($datemin,5,2);
+		$tgl_min	= substr($datemin,8,2)+1;
+		if($tgl_min < 9){
+			$tgl_min	= "0" . $tgl_min;
+		}
+		$datemin	= $thn_min . "-" . $bln_min . "-" . $tgl_min;*/
+		
+		if($datemax == '' || $datemax == 0){
+			$datemax = $this->Datasm_material_m->getNow();
+		}
+		else if($datemin == '' || $datemin == 0){
+			$datemin = $this->Datasm_material_m->getNow();
+		}
+
+		$getDataByDate	= $this->Datape_material_m->DatapeByDate($datemin,$datemax);
+		if($getDataByDate->num_rows() > 0){
+			foreach ($getDataByDate->result() as $datapedb) {
+				$no_rec[] 			= $datapedb->no_rec;
+				$id_proyek[] 		= $datapedb->id_project;
+				$id_produk[]		= $datapedb->id_produk;
+				$volume[]			= $datapedb->volume;
+				$harga_satuan[] 	= $datapedb->harga_satuan;
+				$total_harga[]  	= $datapedb->total_harga;
+				$tanggal_dibuat[]	= $datapedb->tanggal_dibuat;
+			}
+
+			for($i=0; $i<count($id_proyek); $i++){
+				$this->Dataproyek_m->setId_proyek($id_proyek[$i]);
+				$dataproyek 	= $this->Dataproyek_m->getById();
+				foreach ($dataproyek->result() as $dataproyekdb) {
+					$nama_proyek[]	= $dataproyekdb->nama_proyek;
+					$pic[] 			= $dataproyekdb->pic;
+				}
+			}
+
+			$getDatasm	= $this->Datasm_material_m->getAll();
+			if($getDatasm->num_rows() > 0){
+				foreach ($getDatasm->result() as $datasmdb) {
+					$no_rec_sm[] 			= $datasmdb->no_rec;
+					$id_proyek_sm[] 		= $datasmdb->id_project;
+					$id_produk_sm[]			= $datasmdb->id_produk;
+					$volume_sm[]			= $datasmdb->volume;
+					$tanggal_dibuat_sm[] 	= $datasmdb->tanggal_dibuat;
+				}
+
+				for($i=0; $i<count($id_proyek_sm); $i++){
+					$this->Dataproyek_m->setId_proyek($id_proyek_sm[$i]);
+					$dataproyek_sm 	= $this->Dataproyek_m->getById();
+					foreach ($dataproyek_sm->result() as $dataproyek_smdb) {
+						$nama_proyek_sm[]	= $dataproyek_smdb->nama_proyek;
+						$pic_sm[] 			= $dataproyek_smdb->pic;
+					}
+				}
+			}
+
+			$getDataProyek	= $this->Dataproyek_m->getAll();
+			if($getDataProyek->num_rows() > 0){
+				foreach ($getDataProyek->result() as $datadbproyek) {
+					$id_proyek_distinct[]	= $datadbproyek->id_proyek;
+				}
+			}
+
+			$this->load->view('Header_v');
+			$this->load->view('Datape_material_sm_v', array('id_proyek' 		=> $id_proyek, 
+															'id_produk'	 		=> $id_produk, 
+															'volume' 			=> $volume, 
+															'nama_proyek' 		=> $nama_proyek, 
+															'pic' 				=> $pic, 
+															'no_rec' 			=> $no_rec, 
+															'harga_satuan' 		=> $harga_satuan,
+															'total_harga' 		=> $total_harga,
+															'tanggal_dibuat'	=> $tanggal_dibuat,
+															'id_proyek_sm' 		=> $id_proyek_sm,
+															'id_produk_sm' 		=> $id_produk_sm, 
+															'volume_sm' 		=> $volume_sm, 
+															'nama_proyek_sm' 	=> $nama_proyek_sm, 
+															'pic_sm' 			=> $pic_sm, 
+															'no_rec_sm' 		=> $no_rec_sm, 
+															'tanggal_dibuat_sm' => $tanggal_dibuat_sm,
+															'id_proyekdistinct' => $id_proyek_distinct,
+															'notif'				=> 0,
+														 	'id'				=> ''
+															)
+							);
+			$this->load->view('Footer_v');
+		}
+		else{
+			$getDatape	= $this->Datape_material_m->getAll();
+			if($getDatape->num_rows() > 0){
+				foreach ($getDatape->result() as $datapedb) {
+					$no_rec[] 			= $datapedb->no_rec;
+					$id_proyek[] 		= $datapedb->id_project;
+					$id_produk[]		= $datapedb->id_produk;
+					$volume[]			= $datapedb->volume;
+					$harga_satuan[] 	= $datapedb->harga_satuan;
+					$total_harga[]  	= $datapedb->total_harga;
+					$tanggal_dibuat[]	= $datapedb->tanggal_dibuat;
+				}
+
+				for($i=0; $i<count($id_proyek); $i++){
+					$this->Dataproyek_m->setId_proyek($id_proyek[$i]);
+					$dataproyek 	= $this->Dataproyek_m->getById();
+					foreach ($dataproyek->result() as $dataproyekdb) {
+						$nama_proyek[]	= $dataproyekdb->nama_proyek;
+						$pic[] 			= $dataproyekdb->pic;
+					}
+				}
+			}
+
+			$getDatasm	= $this->Datasm_material_m->getAll();
+			if($getDatasm->num_rows() > 0){
+				foreach ($getDatasm->result() as $datasmdb) {
+					$no_rec_sm[] 			= $datasmdb->no_rec;
+					$id_proyek_sm[] 		= $datasmdb->id_project;
+					$id_produk_sm[]			= $datasmdb->id_produk;
+					$volume_sm[]			= $datasmdb->volume;
+					$tanggal_dibuat_sm[] 	= $datasmdb->tanggal_dibuat;
+				}
+
+				for($i=0; $i<count($id_proyek_sm); $i++){
+					$this->Dataproyek_m->setId_proyek($id_proyek_sm[$i]);
+					$dataproyek_sm 	= $this->Dataproyek_m->getById();
+					foreach ($dataproyek_sm->result() as $dataproyek_smdb) {
+						$nama_proyek_sm[]	= $dataproyek_smdb->nama_proyek;
+						$pic_sm[] 			= $dataproyek_smdb->pic;
+					}
+				}
+			}
+
+			$getDataProyek	= $this->Dataproyek_m->getAll();
+			if($getDataProyek->num_rows() > 0){
+				foreach ($getDataProyek->result() as $datadbproyek) {
+					$id_proyek_distinct[]	= $datadbproyek->id_proyek;
+				}
+			}
+
+			$this->load->view('Header_v');
+			$this->load->view('Datape_material_sm_v', array('id_proyek' 		=> $id_proyek, 
+															'id_produk'	 		=> $id_produk, 
+															'volume' 			=> $volume, 
+															'nama_proyek' 		=> $nama_proyek, 
+															'pic' 				=> $pic, 
+															'no_rec' 			=> $no_rec, 
+															'harga_satuan' 		=> $harga_satuan,
+															'total_harga' 		=> $total_harga,
+															'tanggal_dibuat'	=> $tanggal_dibuat,
+															'id_proyek_sm' 		=> $id_proyek_sm,
+															'id_produk_sm' 		=> $id_produk_sm, 
+															'volume_sm' 		=> $volume_sm, 
+															'nama_proyek_sm' 	=> $nama_proyek_sm, 
+															'pic_sm' 			=> $pic_sm, 
+															'no_rec_sm' 		=> $no_rec_sm, 
+															'tanggal_dibuat_sm' => $tanggal_dibuat_sm,
 															'id_proyekdistinct' => $id_proyek_distinct,
 															'notif'				=> 1,
 														 	'id'				=> ''

@@ -48,8 +48,8 @@
 						<td><?php echo $pic[$i]; ?></td>
 						<td><?php echo $id_produk[$i]; ?></td>
 						<td><?php echo $volume[$i]; ?></td>
-						<td><?php echo $harga_satuan[$i]; ?></td>
-						<td><?php echo $total_harga[$i]; ?></td>
+						<td>Rp. <?php echo number_format($harga_satuan[$i],0,",","."); ?>,00</td>
+						<td>Rp. <?php echo number_format($total_harga[$i],0,",","."); ?>,00</td>
 						<td>
 							<button class="button rounded primary edit" id="edit_<?php echo $no_rec[$i]; ?>"><span class="mif-pencil icon"></span> Edit</button>
 							<button class="button rounded danger delete" id="delete_<?php echo $no_rec[$i]; ?>"><span class="mif-bin icon"></span> Hapus</button>

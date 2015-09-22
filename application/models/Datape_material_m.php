@@ -186,5 +186,12 @@
 		    $this->db->insert('datape_material', $data);
 		    
      	}
+
+     	public function DatapeByDate($datemin, $datemax){
+     		$sql 	= "SELECT * FROM datape_material WHERE (tanggal_dibuat between '". $datemin ."' AND '". $datemax ."')";
+     		$query  = $this->db->query($sql);
+
+     		return $query;
+     	}
 	}
 ?>
