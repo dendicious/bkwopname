@@ -45,6 +45,7 @@
 					?>
 						<a class="app-bar-element" href="<?php echo site_url();?>Dataoe_material/Dataoe_material_se">Data Material OE</a>
 						<a class="app-bar-element" href="<?php echo site_url();?>Datase_material">Data Material SE</a>
+						<a class="app-bar-element" href="<?php echo site_url();?>Datase_invoice">Data Invoice</a>
 					<?php
 						}
 						else if($this->session->userdata('bkwopname_idjabatan') == 4){
@@ -55,6 +56,7 @@
 						else if($this->session->userdata('bkwopname_idjabatan') == 5){
 					?>
 						<a class="app-bar-element" href="<?php echo site_url();?>Datasm_material">Data Material PE</a>
+						<a class="app-bar-element" href="<?php echo site_url();?>Datasm_headpo/Dataproyeksm">Headpo</a>
 					<?php
 						}
 					?>

@@ -66,8 +66,6 @@
 						<input type="hidden" id="nama_proyek<?php echo $no_rec[$i];?>" value="<?php echo $nama_proyek[$i]; ?>">
 						<input type="hidden" id="pic<?php echo $no_rec[$i];?>" value="<?php echo $pic[$i]; ?>">
 						
-						
-						
 						<td><?php echo $id_proyek[$i]; ?></td>
 						<td><?php echo $nama_proyek[$i]; ?></td>
 						<td><?php echo $pic[$i]; ?></td>

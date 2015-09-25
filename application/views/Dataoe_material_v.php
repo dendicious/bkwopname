@@ -28,9 +28,9 @@
 			<table class="table bordered border" id="table">
 
 				<thead>
-					<th colspan="8">
+					<!--<th colspan="8">
 						<div class="place-right">
-							<select id="select2" name="id_proyek" class="id_proyek" style="width:380px;">
+							<select id="selectid" name="id_proyek" class="id_proyek" style="width:380px;">
 							<?php
 								$jml_proyek	= count($idproyek_dataproyek);
 								if($jml_proyek > 0){
@@ -44,7 +44,7 @@
 							?>
 							</select>
 						</div>
-					</th>
+					</th>-->
 					<tr>
 						<th>ID Proyek</th>
 						<th>Nama Proyek</th>
@@ -97,7 +97,7 @@
 				    			<td><label id="label_proyek">Proyek</label></td>
 				    			<td>:</td>
 				    			<td>
-							    	<select id="select" name="proyek" class="proyek" style="width:380px;">
+							    	<select id="select2" name="proyek" class="proyek" style="width:380px;">
 							    		<?php
 							    			$jml_dataproyek = count($idproyek_dataproyek);
 							    			for($j=0; $j<$jml_dataproyek; $j++){
@@ -210,12 +210,10 @@
 
 		$(document).ready(function() {
 			$("#table").dataTable();
-			$("#select2").select2();
-
-		$(document).ready(function() {
-			$("#table").dataTable();
 
 			$("#select2").select2();
+
+			$("#selectid").select2();
 
 			$(".id_proyek").change(function(){
 				var value = $(".id_proyek").val();
@@ -236,6 +234,7 @@
 				$(".ubah").show();
 			    showDialog('#formdatamaterialoe');
 			});
+
 			$(".ubah").click(function(){
 				var no_rec				= $("#no_rec").val();
 				var id_proyek 			= $(".proyek").val();

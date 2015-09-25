@@ -186,5 +186,18 @@
 		    $this->db->insert('datasm_material', $data);
 		    
      	}
+
+     	public function getProjectsm(){
+			$query	= $this->db->query('SELECT DISTINCT id_project FROM datasm_material');
+
+			return $query;
+		}
+
+		public function DatasmByDate($datemin, $datemax){
+     		$sql 	= "SELECT * FROM datasm_material WHERE (tanggal_dibuat between '".$datemin."' AND '".$datemax."') AND id_project='".$this->getId_project()."'";
+     		$query  = $this->db->query($sql);
+
+     		return $query;
+     	}
 	}
 ?>

@@ -2,14 +2,15 @@
 	/**
 	* 
 	*/
-	class Datape_material_m extends CI_Model{
-
+	class Datase_invoice_m extends CI_Model{
+		
 		function __construct(){
-			parent::__construct();
-	        $this->load->database();
+			parent:: __construct();
+			$this->load->database();
 		}
 
 		private $no_rec;
+		private $no_invoice;
 		private $id_user;
 		private $id_project;
 		private $id_produk;
@@ -22,6 +23,10 @@
 		//setter
 		public function setNo_rec($no_rec){
 			$this->no_rec = $no_rec;
+		}
+
+		public function setNo_invoice($no_invoice){
+			$this->no_invoice = $no_invoice;
 		}
 
 		public function setId_user($id_user){
@@ -61,6 +66,10 @@
 			return $this->no_rec;
 		}
 
+		public function getNo_invoice(){
+			return $this->no_invoice;
+		}
+
 		public function getId_user(){
 			return $this->id_user;
 		}
@@ -95,26 +104,38 @@
 
 		//method lainnya
 		public function getAll(){
-			$query	= $this->db->get('datape_material');
+			$query	= $this->db->get('datase_invoice');
 
 			return $query;
 		}
 
 		public function getByIdProject(){
 			$this->db->where('id_project', $this->getId_project());
-			$query 	= $this->db->get('datape_material');
+			$query 	= $this->db->get('datase_invoice');
+
+			return $query;
+		}
+
+		public function getByIdAndInvoice(){
+			$this->db->where('id_project', $this->getId_project());
+			$this->db->where('no_invoice', $this->getNo_invoice());
+			$query	= $this->db->get('datase_invoice');
 
 			return $query;
 		}
 
 		public function getMaxId(){
-			$this->db->select_max('no_rec', 'max_id');
-			$query 	= $this->db->get('datape_material');
+			$this->db->select_max('no_invoice', 'max_id');
+			$this->db->where('id_project', $this->getId_project());
+			$query 	= $this->db->get('datase_invoice');
 
 			if($query->num_rows() > 0){
 				foreach ($query->result() as $maxid_db) {
 					$max_id = $maxid_db->max_id;
 				}
+			}
+			else{
+				$maxid_db = 0;
 			}
 
 			$max_id++;
@@ -124,38 +145,38 @@
 		public function insertData($dataarray){
 
       		for($i=0;$i<count($dataarray);$i++){
-      			$id = $this->getMaxId();
 		        $data = array(
-		        	'no_rec'=>$id,
-		            'id_user'=>$dataarray[$i]['id_user'],
-		            'id_project'=>$dataarray[$i]['id_proyek'],
-		            'id_produk'=>$dataarray[$i]['id_produk'],
-		            'volume'=>$dataarray[$i]['volume'],
-		            'harga_satuan'=>$dataarray[$i]['harga_satuan'],
-		            'total_harga'=>$dataarray[$i]['total'],
+		        	'no_rec'		=>$dataarray[$i]['no_rec'],
+		        	'no_invoice'	=>$dataarray[$i]['no_invoice'],
+		            'id_user'		=>$dataarray[$i]['id_user'],
+		            'id_project'	=>$dataarray[$i]['id_project'],
+		            'id_produk'		=>$dataarray[$i]['id_produk'],
+		            'volume'		=>$dataarray[$i]['volume'],
+		            'harga_satuan'	=>$dataarray[$i]['harga_satuan'],
+		            'total_harga'	=>$dataarray[$i]['total_harga'],
 		            'tanggal_dibuat'=>$dataarray[$i]['tanggal_dibuat']
 		            );
 		            
-		    $this->db->insert('datape_material', $data);
+		    $this->db->insert('datase_invoice', $data);
 		    }
      	}
 
-     	public function ubah($datape_material){
+     	public function ubah($datase_invoice){
      		$this->db->where('no_rec', $this->getNo_rec());
-     		$query	= $this->db->update('datape_material', $dataoe_material);
+     		$query	= $this->db->update('datase_invoice', $dataoe_material);
 
      		return $query;
      	}
 
      	public function hapus(){
      		$this->db->where('no_rec', $this->getNo_rec());
-     		$query 	= $this->db->delete('datape_material');
+     		$query 	= $this->db->delete('datase_invoice');
 
      		return $query;
      	}
 
      	public function getNow(){
-		    $sql    = 'SELECT NOW() AS NOW';
+		    $sql    = 'SELECT DATE(NOW()) AS NOW';
 		    $query  = $this->db->query($sql);
 
 		    foreach ($query->result() as $time) {
@@ -166,7 +187,7 @@
 
 		public function cekIdProject(){
 			$this->db->where('id_project', $this->getId_project());
-			$query 	= $this->db->get('datape_material');
+			$query 	= $this->db->get('datase_invoice');
 
 			return $query->num_rows();
 		}
@@ -183,15 +204,7 @@
 		        'tanggal_dibuat'=>$dataarray['tanggal_dibuat']            
 		    );
 		            
-		    $this->db->insert('datape_material', $data);
-		    
-     	}
-
-     	public function DatapeByDate($datemin, $datemax){
-     		$sql 	= "SELECT * FROM datape_material WHERE (tanggal_dibuat between '".$datemin."' AND '".$datemax."') AND id_project='".$this->getId_project()."'";
-     		$query  = $this->db->query($sql);
-
-     		return $query;
+		    $this->db->insert('datase_invoice', $data);
      	}
 	}
 ?>

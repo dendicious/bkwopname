@@ -166,7 +166,7 @@
 	    }
 
 	    function closeDialog(id){
-	    	 var dialog = $(id).data('dialog');
+	    	var dialog = $(id).data('dialog');
 	        dialog.close();
 	    }
 	</script>

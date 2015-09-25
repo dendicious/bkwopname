@@ -133,5 +133,12 @@
 
 	    	return $query;
 	    }
+
+	    public function getProjectById(){
+	    	$this->db->where('id_proyek', $this->getId_proyek());
+	    	$query	= $this->db->get('dataproyek');
+
+	    	return $query;
+	    }
 	}
 ?>

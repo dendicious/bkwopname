@@ -2,11 +2,11 @@
 	/**
 	* 
 	*/
-	class Datape_material_m extends CI_Model{
-
+	class Datasm_material_temp_m extends CI_Model{
+		
 		function __construct(){
-			parent::__construct();
-	        $this->load->database();
+			parent:: __construct();
+			$this->load->database();
 		}
 
 		private $no_rec;
@@ -95,30 +95,16 @@
 
 		//method lainnya
 		public function getAll(){
-			$query	= $this->db->get('datape_material');
+			$query	= $this->db->get('datasm_material_temp');
 
 			return $query;
 		}
 
 		public function getByIdProject(){
 			$this->db->where('id_project', $this->getId_project());
-			$query 	= $this->db->get('datape_material');
+			$query 	= $this->db->get('datasm_material_temp');
 
 			return $query;
-		}
-
-		public function getMaxId(){
-			$this->db->select_max('no_rec', 'max_id');
-			$query 	= $this->db->get('datape_material');
-
-			if($query->num_rows() > 0){
-				foreach ($query->result() as $maxid_db) {
-					$max_id = $maxid_db->max_id;
-				}
-			}
-
-			$max_id++;
-			return $max_id;
 		}
 
 		public function insertData($dataarray){
@@ -136,60 +122,27 @@
 		            'tanggal_dibuat'=>$dataarray[$i]['tanggal_dibuat']
 		            );
 		            
-		    $this->db->insert('datape_material', $data);
+		    $this->db->insert('datasm_material_temp', $data);
 		    }
-     	}
-
-     	public function ubah($datape_material){
-     		$this->db->where('no_rec', $this->getNo_rec());
-     		$query	= $this->db->update('datape_material', $dataoe_material);
-
-     		return $query;
      	}
 
      	public function hapus(){
      		$this->db->where('no_rec', $this->getNo_rec());
-     		$query 	= $this->db->delete('datape_material');
+     		$this->db->where('id_project', $this->getId_project());
+     		$query 	= $this->db->delete('datasm_material_temp');
 
      		return $query;
      	}
 
-     	public function getNow(){
-		    $sql    = 'SELECT NOW() AS NOW';
-		    $query  = $this->db->query($sql);
-
-		    foreach ($query->result() as $time) {
-		        $now = $time->NOW;
-	        }
-	        return $now;
-		}
-
-		public function cekIdProject(){
-			$this->db->where('id_project', $this->getId_project());
-			$query 	= $this->db->get('datape_material');
-
-			return $query->num_rows();
-		}
-
 		public function insertSingleData($dataarray){
-		    $data = array(
-		       	'no_rec'=>$dataarray['no_rec'],
-		        'id_user'=>$dataarray['id_user'],
-		        'id_project'=>$dataarray['id_proyek'],
-		        'id_produk'=>$dataarray['id_produk'],
-		        'volume'=>$dataarray['volume'],
-		        'harga_satuan'=>$dataarray['harga_satuan'],
-		        'total_harga'=>$dataarray['total_harga'],
-		        'tanggal_dibuat'=>$dataarray['tanggal_dibuat']            
-		    );
-		            
-		    $this->db->insert('datape_material', $data);
+		    $query	= $this->db->insert('datasm_material_temp', $dataarray);
 		    
+		    return $query;
      	}
 
-     	public function DatapeByDate($datemin, $datemax){
-     		$sql 	= "SELECT * FROM datape_material WHERE (tanggal_dibuat between '".$datemin."' AND '".$datemax."') AND id_project='".$this->getId_project()."'";
-     		$query  = $this->db->query($sql);
+     	public function hapusAlltempById(){
+     		$this->db->where('id_project', $this->getId_project());
+     		$query 	= $this->db->delete('datasm_material_temp');
 
      		return $query;
      	}

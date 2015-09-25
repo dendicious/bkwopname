@@ -289,17 +289,12 @@
 	}
 
 	public function DatasmByDate(){
-		$datemin 		= $this->uri->segment(3);
-		$datemax 		= $this->uri->segment(4);
+		$idproject 		= $this->uri->segment(3);
+		$datemin 		= $this->uri->segment(4);
+		$datemax 		= $this->uri->segment(5);
 
-		/*$thn_min	= substr($datemin,0,4);
-		$bln_min	= substr($datemin,5,2);
-		$tgl_min	= substr($datemin,8,2)+1;
-		if($tgl_min < 9){
-			$tgl_min	= "0" . $tgl_min;
-		}
-		$datemin	= $thn_min . "-" . $bln_min . "-" . $tgl_min;*/
-		
+		$this->Datape_material_m->setId_project($idproject);
+
 		if($datemax == '' || $datemax == 0){
 			$datemax = $this->Datasm_material_m->getNow();
 		}
@@ -307,7 +302,16 @@
 			$datemin = $this->Datasm_material_m->getNow();
 		}
 
+		$thn_max	= substr($datemax,0,4);
+		$bln_max	= substr($datemax,5,2);
+		$tgl_max	= substr($datemax,8,2)+1;
+		if($tgl_max < 9){
+			$tgl_max	= "0" . $tgl_max;
+		}
+		$datemax	= $thn_max . "-" . $bln_max . "-" . $tgl_max;
+
 		$getDataByDate	= $this->Datape_material_m->DatapeByDate($datemin,$datemax);
+		echo $getDataByDate->num_rows();
 		if($getDataByDate->num_rows() > 0){
 			foreach ($getDataByDate->result() as $datapedb) {
 				$no_rec[] 			= $datapedb->no_rec;

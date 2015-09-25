@@ -245,10 +245,11 @@
 			});
 
 			$("#search").click(function(){
+				var idproject 	= $("#id_projek_reload").val();
 				var datemin		= $("#datemin").val();
 				var datemax 	= $("#datemax").val();
 				
-				window.location	= '<?php echo site_url(); ?>Datasm_material/DatasmByDate/' + datemin + '/' + datemax;
+				window.location	= '<?php echo site_url(); ?>Datasm_material/DatasmByDate/' + idproject + '/'+ datemin + '/' + datemax;
 			});
 		});
 	</script>

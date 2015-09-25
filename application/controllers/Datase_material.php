@@ -9,6 +9,7 @@
 
 			$this->load->model('Datase_material_m');
 			$this->load->model('Dataproyek_m');
+			$this->load->model('Datasm_headpo_m');
 		}
 
 		public function index(){
