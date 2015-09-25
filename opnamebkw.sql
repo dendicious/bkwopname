@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 15, 2015 at 06:41 AM
+-- Generation Time: Sep 25, 2015 at 03:03 AM
 -- Server version: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `dataoe_material` (
   `tanggal_update` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`no_rec`),
   KEY `id_user` (`id_user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `dataoe_material`
@@ -70,7 +70,9 @@ CREATE TABLE IF NOT EXISTS `dataoe_material` (
 INSERT INTO `dataoe_material` (`no_rec`, `id_user`, `id_project`, `id_produk`, `volume`, `harga_satuan`, `total_harga`, `tanggal_dibuat`, `tanggal_update`) VALUES
 (1, 'U003', 'PRJK-002452', 'X2-Y2/01/AB', 4, 300000, 1200000, '2015-09-06 17:00:00', '2015-09-14 04:03:08'),
 (2, 'U003', 'PRJK-002452', 'X6-Y5/02/CK', 6, 700000, 4200000, '2015-09-06 17:00:00', '0000-00-00 00:00:00'),
-(3, 'U003', 'PRJK-002453', 'X2-Y2/01/AB', 3, 950000, 2750000, '2015-09-06 17:00:00', '0000-00-00 00:00:00');
+(3, 'U003', 'PRJK-002453', 'X2-Y2/01/AB', 3, 950000, 2750000, '2015-09-06 17:00:00', '0000-00-00 00:00:00'),
+(4, 'U003', 'PRJK-002452', 'X2-Y2/02/CD', 2, 100000, 200000, '2015-09-21 17:00:00', '0000-00-00 00:00:00'),
+(5, 'U003', 'PRJK-002452', 'X2-Y2/03/FF', 10, 50000, 500000, '2015-09-21 17:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -97,7 +99,10 @@ CREATE TABLE IF NOT EXISTS `datape_material` (
 
 INSERT INTO `datape_material` (`no_rec`, `id_user`, `id_project`, `id_produk`, `volume`, `harga_satuan`, `total_harga`, `tanggal_dibuat`, `tanggal_update`) VALUES
 (1, 'U004', 'PRJK-002452', 'X2-Y2/01/AB', 4, 300000, 1200000, '2015-09-15 04:22:13', '0000-00-00 00:00:00'),
-(3, 'U004', 'PRJK-002453', 'X2-Y2/01/AB', 3, 950000, 2750000, '2015-09-15 04:25:57', '0000-00-00 00:00:00');
+(2, 'U004', 'PRJK-002452', 'X6-Y5/02/CK', 6, 700000, 4200000, '2015-09-22 03:58:09', '0000-00-00 00:00:00'),
+(3, 'U004', 'PRJK-002453', 'X2-Y2/01/AB', 3, 950000, 2750000, '2015-09-15 04:25:57', '0000-00-00 00:00:00'),
+(4, 'U004', 'PRJK-002452', 'X2-Y2/02/CD', 2, 100000, 200000, '2015-09-22 03:58:09', '0000-00-00 00:00:00'),
+(5, 'U004', 'PRJK-002452', 'X2-Y2/03/FF', 10, 50000, 500000, '2015-09-22 03:58:10', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -134,9 +139,16 @@ CREATE TABLE IF NOT EXISTS `datase_headinvoice` (
   `id_proyek` varchar(30) NOT NULL,
   `total` double(15,0) NOT NULL,
   `tanggal_dibuat` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `tanggal_diubah` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id_rec`)
+  `tanggal_diubah` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `datase_headinvoice`
+--
+
+INSERT INTO `datase_headinvoice` (`id_rec`, `id_proyek`, `total`, `tanggal_dibuat`, `tanggal_diubah`) VALUES
+(1, 'PRJK-002452', 5400000, '2015-09-24 16:15:01', '2015-09-24 16:15:01'),
+(1, 'PRJK-002453', 2750000, '2015-09-23 17:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -146,6 +158,7 @@ CREATE TABLE IF NOT EXISTS `datase_headinvoice` (
 
 CREATE TABLE IF NOT EXISTS `datase_invoice` (
   `no_rec` int(10) NOT NULL,
+  `no_invoice` int(11) NOT NULL,
   `id_user` varchar(15) NOT NULL,
   `id_project` varchar(30) NOT NULL,
   `id_produk` varchar(30) NOT NULL,
@@ -156,6 +169,15 @@ CREATE TABLE IF NOT EXISTS `datase_invoice` (
   `tanggal_update` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`no_rec`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `datase_invoice`
+--
+
+INSERT INTO `datase_invoice` (`no_rec`, `no_invoice`, `id_user`, `id_project`, `id_produk`, `volume`, `harga_satuan`, `total_harga`, `tanggal_dibuat`, `tanggal_update`) VALUES
+(1, 1, 'U005', 'PRJK-002452', 'X2-Y2/01/AB', 4, 300000, 1200000, '2015-09-15 04:22:13', '0000-00-00 00:00:00'),
+(2, 1, 'U005', 'PRJK-002452', 'X6-Y5/02/CK', 6, 700000, 4200000, '2015-09-22 03:58:09', '0000-00-00 00:00:00'),
+(3, 1, 'U005', 'PRJK-002453', 'X2-Y2/01/AB', 3, 950000, 2750000, '2015-09-15 04:25:57', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -183,7 +205,9 @@ CREATE TABLE IF NOT EXISTS `datase_material` (
 INSERT INTO `datase_material` (`no_rec`, `id_user`, `id_project`, `id_produk`, `volume`, `harga_satuan`, `total_harga`, `tanggal_dibuat`, `tanggal_update`) VALUES
 (1, 'U003', 'PRJK-002452', 'X2-Y2/01/AB', 4, 300000, 1200000, '2015-09-14 04:17:18', '0000-00-00 00:00:00'),
 (2, 'U003', 'PRJK-002452', 'X6-Y5/02/CK', 6, 700000, 4200000, '2015-09-15 04:22:47', '0000-00-00 00:00:00'),
-(3, 'U003', 'PRJK-002453', 'X2-Y2/01/AB', 3, 950000, 2750000, '2015-09-15 04:23:31', '0000-00-00 00:00:00');
+(3, 'U003', 'PRJK-002453', 'X2-Y2/01/AB', 3, 950000, 2750000, '2015-09-15 04:23:31', '0000-00-00 00:00:00'),
+(4, 'U003', 'PRJK-002452', 'X2-Y2/02/CD', 2, 100000, 200000, '2015-09-22 03:57:54', '0000-00-00 00:00:00'),
+(5, 'U003', 'PRJK-002452', 'X2-Y2/03/FF', 10, 50000, 500000, '2015-09-22 03:57:53', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -193,19 +217,28 @@ INSERT INTO `datase_material` (`no_rec`, `id_user`, `id_project`, `id_produk`, `
 
 CREATE TABLE IF NOT EXISTS `datasm_headpo` (
   `no_rec` int(10) NOT NULL AUTO_INCREMENT,
+  `no_invoice` int(11) NOT NULL,
   `id_user` varchar(15) NOT NULL,
   `id_project` varchar(30) NOT NULL,
-  `retensi` double(1,1) NOT NULL,
-  `kebersihan` double(1,1) NOT NULL,
-  `repair` double(1,1) NOT NULL,
-  `pph` double(1,1) NOT NULL,
+  `retensi` double NOT NULL,
+  `kebersihan` double NOT NULL,
+  `repair` double NOT NULL,
+  `pph` double NOT NULL,
   `total_harga` double(15,0) NOT NULL,
   `total_potongan` double(15,0) NOT NULL,
   `total_bersih` double(15,0) NOT NULL,
   `tanggal_dibuat` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `tanggal_update` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`no_rec`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Dumping data for table `datasm_headpo`
+--
+
+INSERT INTO `datasm_headpo` (`no_rec`, `no_invoice`, `id_user`, `id_project`, `retensi`, `kebersihan`, `repair`, `pph`, `total_harga`, `total_potongan`, `total_bersih`, `tanggal_dibuat`, `tanggal_update`) VALUES
+(6, 1, 'U005', 'PRJK-002452', 0.02, 0.03, 0.05, 0.02, 5400000, 648000, 4752000, '2015-09-23 17:00:00', '0000-00-00 00:00:00'),
+(8, 1, 'U005', 'PRJK-002453', 0.02, 0.03, 0.05, 0.02, 2750000, 330000, 2420000, '2015-09-23 17:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -224,6 +257,35 @@ CREATE TABLE IF NOT EXISTS `datasm_material` (
   `tanggal_dibuat` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `tanggal_update` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`no_rec`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `datasm_material`
+--
+
+INSERT INTO `datasm_material` (`no_rec`, `id_user`, `id_project`, `id_produk`, `volume`, `harga_satuan`, `total_harga`, `tanggal_dibuat`, `tanggal_update`) VALUES
+(1, 'U005', 'PRJK-002452', 'X2-Y2/01/AB', 4, 300000, 1200000, '2015-09-15 04:22:13', '0000-00-00 00:00:00'),
+(2, 'U005', 'PRJK-002452', 'X6-Y5/02/CK', 6, 700000, 4200000, '2015-09-22 03:58:09', '0000-00-00 00:00:00'),
+(3, 'U005', 'PRJK-002453', 'X2-Y2/01/AB', 3, 950000, 2750000, '2015-09-15 04:25:57', '0000-00-00 00:00:00'),
+(4, 'U005', 'PRJK-002452', 'X2-Y2/02/CD', 2, 100000, 200000, '2015-09-22 03:58:09', '0000-00-00 00:00:00'),
+(5, 'U005', 'PRJK-002452', 'X2-Y2/03/FF', 10, 50000, 500000, '2015-09-22 03:58:10', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `datasm_material_temp`
+--
+
+CREATE TABLE IF NOT EXISTS `datasm_material_temp` (
+  `no_rec` int(11) NOT NULL,
+  `id_user` varchar(15) NOT NULL,
+  `id_project` varchar(30) NOT NULL,
+  `id_produk` varchar(30) NOT NULL,
+  `volume` int(11) NOT NULL,
+  `harga_satuan` double(15,0) NOT NULL,
+  `total_harga` double(15,0) NOT NULL,
+  `tanggal_dibuat` datetime NOT NULL,
+  `tanggal_update` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -251,7 +313,8 @@ INSERT INTO `datauser` (`id_user`, `username`, `password`, `nama`, `id_jabatan`,
 ('U001', 'fernalia', 'fc3cee5d6a37bd5732a96e6f87ffaf2d', 'Fernalia', 1, '2015-09-05 05:20:53', '2015-09-05 05:20:53'),
 ('U002', 'ferdiana', '827ccb0eea8a706c4c34a16891f84e7b', 'Ferdiana', 2, '2015-09-05 05:35:22', '2015-09-05 06:20:37'),
 ('U003', 'fauziyyah', '827ccb0eea8a706c4c34a16891f84e7b', 'Fauziyyah', 3, '2015-09-06 15:04:06', '2015-09-07 13:30:43'),
-('U004', 'frisca', '827ccb0eea8a706c4c34a16891f84e7b', 'Frisca', 4, '2015-09-15 02:41:22', NULL);
+('U004', 'frisca', '827ccb0eea8a706c4c34a16891f84e7b', 'Frisca', 4, '2015-09-15 02:41:22', NULL),
+('U005', 'fania', '827ccb0eea8a706c4c34a16891f84e7b', 'Fania', 5, '2015-09-16 01:39:27', NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
