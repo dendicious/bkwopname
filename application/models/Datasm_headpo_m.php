@@ -2,7 +2,7 @@
 	/**
 	* 
 	*/
-	class Datasm_headpo_m extends CI_Model{
+	class datasm_headpo_m extends CI_Model{
 		
 		function __construct(){
 			parent::__construct();

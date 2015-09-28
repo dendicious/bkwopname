@@ -2,7 +2,7 @@
 	/**
 	* 
 	*/
-	class Datauser_m extends CI_Model
+	class datauser_m extends CI_Model
 	{
 		private $id_user;
 		private $username;

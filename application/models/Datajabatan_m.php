@@ -2,7 +2,7 @@
 	/**
 	* 
 	*/
-	class Datajabatan_m extends CI_Model
+	class datajabatan_m extends CI_Model
 	{
 		private $id_jabatan;
 		private $jabatan;

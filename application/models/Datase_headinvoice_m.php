@@ -2,7 +2,7 @@
 	/**
 	* 
 	*/
-	class Datase_headinvoice_m extends CI_Model{
+	class datase_headinvoice_m extends CI_Model{
 		
 		function __construct(){
 			parent:: __construct();

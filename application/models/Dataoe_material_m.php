@@ -2,7 +2,7 @@
 	/**
 	* 
 	*/
-	class Dataoe_material_m extends CI_Model
+	class dataoe_material_m extends CI_Model
 	{
 		function __construct(){
 	        parent::__construct();

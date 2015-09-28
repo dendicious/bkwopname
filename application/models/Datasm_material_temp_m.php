@@ -2,7 +2,7 @@
 	/**
 	* 
 	*/
-	class Datasm_material_temp_m extends CI_Model{
+	class datasm_material_temp_m extends CI_Model{
 		
 		function __construct(){
 			parent:: __construct();

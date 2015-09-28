@@ -2,7 +2,7 @@
 	/**
 	* 
 	*/
-	class Datape_material_m extends CI_Model{
+	class datape_material_m extends CI_Model{
 
 		function __construct(){
 			parent::__construct();
